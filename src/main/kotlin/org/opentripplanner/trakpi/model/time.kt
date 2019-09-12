@@ -1,14 +1,33 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 import java.time.LocalTime
 
+/**
+ * This class represent a Transit service time. A service is relative to the day it operates, and a journey is
+ * relative to the day witch the Journey start. Since a service may operate over more than 24 hours and a journey
+ * may last for several days this class have an extra "daysOffset".
+ * <p/>
+ * TimeOfDay can not be negative.
+ * <p/>
+ * The time should be seen as relative to 12:00 am (noon) minus 12 hours. This is midnight on most days in a year
+ * except on days where the time is switching between summer and winter time. This follows the same rules as the
+ * GTFS specification. Other than this, we do not make any special attempts to support switching between summer
+ * and winter time.
+ */
+data class TimeOfDay(val hh: Int, val mm: Int, val ss: Int = 0, val daysOffset: Int = 0) {
 
-data class TimeOfDay(val hh: Int, val mm: Int, val ss: Int = 0, val offsetDays: Int = 0) {
+    /**
+     * Format used is 24 hour times like this:
+     * - 17:15 (15 minutes past 7 pm)
+     * - 17:15:59 (59 seconds and 15 minutes past 7 pm)
+     * - 03:15+1d (15 minutes past 3 am plus one extra day)
+     * - 23:59:59+3d (1 minite )
+     */
     override fun toString(): String {
-        return if (ss == 0 && offsetDays == 0) String.format("%02d:%02d", hh, mm)
-        else if (ss == 0)                      String.format("%02d:%02d+%d", hh, mm, offsetDays)
-        else if (offsetDays == 0)              String.format("%02d:%02d:%02d", hh, mm, ss)
-        else                                   String.format("%02d:%02d:%02d+%d", hh, mm, ss, offsetDays)
+        return if (ss == 0 && daysOffset == 0) String.format("%02d:%02d", hh, mm)
+        else if (ss == 0)                      String.format("%02d:%02d%+dd", hh, mm, daysOffset)
+        else if (daysOffset == 0)              String.format("%02d:%02d:%02d", hh, mm, ss)
+        else                                   String.format("%02d:%02d:%02d%+dd", hh, mm, ss, daysOffset)
     }
 }
 

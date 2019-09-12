@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 
 enum class SearchMode { DEPART_FROM, ARRIVE_BY, TIME_TABLE }

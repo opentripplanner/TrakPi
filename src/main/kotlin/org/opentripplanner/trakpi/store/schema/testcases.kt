@@ -1,10 +1,10 @@
 package org.opentripplanner.trakpi.store.schema
 
-import org.opentripplanner.trakpi.domain.model.Tag
-import org.opentripplanner.trakpi.domain.model.TagExpression
-import org.opentripplanner.trakpi.domain.model.TestCase
-import org.opentripplanner.trakpi.domain.model.TestPlan
-import org.opentripplanner.trakpi.domain.model.TravelRequest
+import org.opentripplanner.trakpi.model.Tag
+import org.opentripplanner.trakpi.model.TagExpression
+import org.opentripplanner.trakpi.model.TestCase
+import org.opentripplanner.trakpi.model.TestPlan
+import org.opentripplanner.trakpi.model.TravelRequest
 
 
 class DbTestCase(

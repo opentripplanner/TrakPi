@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 import java.lang.IllegalStateException
 import java.util.regex.Pattern

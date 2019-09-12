@@ -1,10 +1,10 @@
-package org.opentripplanner.trakpi.domain.application
+package org.opentripplanner.trakpi.application
 
-import org.opentripplanner.trakpi.domain.model.Planner
-import org.opentripplanner.trakpi.domain.model.TestCase
-import org.opentripplanner.trakpi.domain.model.TestPlan
-import org.opentripplanner.trakpi.domain.model.TestProfile
-import org.opentripplanner.trakpi.domain.model.TestRun
+import org.opentripplanner.trakpi.model.Planner
+import org.opentripplanner.trakpi.model.TestCase
+import org.opentripplanner.trakpi.model.TestPlan
+import org.opentripplanner.trakpi.model.TestProfile
+import org.opentripplanner.trakpi.model.TestRun
 import org.opentripplanner.trakpi.store.framework.DbClient
 
 object DomainService {

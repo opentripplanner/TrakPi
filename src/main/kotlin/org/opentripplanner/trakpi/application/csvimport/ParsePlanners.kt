@@ -1,6 +1,6 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
-import org.opentripplanner.trakpi.domain.model.Planner
+import org.opentripplanner.trakpi.model.Planner
 
 
 internal class ParsePlanners (val parser: CsvParser) {

@@ -1,9 +1,9 @@
 package org.opentripplanner.trakpi.store.schema
 
-import org.opentripplanner.trakpi.domain.model.Planner
-import org.opentripplanner.trakpi.domain.model.PlannerAPI
-import org.opentripplanner.trakpi.domain.model.TestProfile
-import org.opentripplanner.trakpi.domain.model.TestResult
+import org.opentripplanner.trakpi.model.Planner
+import org.opentripplanner.trakpi.model.PlannerAPI
+import org.opentripplanner.trakpi.model.TestProfile
+import org.opentripplanner.trakpi.model.TestResult
 import java.time.LocalDateTime
 
 

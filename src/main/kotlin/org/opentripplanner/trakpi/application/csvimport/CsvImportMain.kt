@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
 import org.opentripplanner.trakpi.store.framework.DbClient
 import org.opentripplanner.trakpi.store.framework.DbCollection

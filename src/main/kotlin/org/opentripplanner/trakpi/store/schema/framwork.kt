@@ -1,8 +1,8 @@
 package org.opentripplanner.trakpi.store.schema
 
-import org.opentripplanner.trakpi.domain.model.Entity
-import org.opentripplanner.trakpi.domain.model.NamedClass
-import org.opentripplanner.trakpi.domain.model.NamedEntity
+import org.opentripplanner.trakpi.model.Entity
+import org.opentripplanner.trakpi.model.NamedClass
+import org.opentripplanner.trakpi.model.NamedEntity
 
 
 open class DbEntity(

@@ -1,7 +1,7 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
-import org.opentripplanner.trakpi.domain.model.TagExpression
-import org.opentripplanner.trakpi.domain.model.TestPlan
+import org.opentripplanner.trakpi.model.TagExpression
+import org.opentripplanner.trakpi.model.TestPlan
 
 internal class ParseTestPlans  (val parser: CsvParser) {
     companion object {

@@ -1,12 +1,14 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
-import org.opentripplanner.trakpi.domain.model.TransitMode.Companion.DEFAULT
-import org.opentripplanner.trakpi.domain.model.TransitMode.Companion.TRANSIT
+import org.opentripplanner.trakpi.model.TransitMode.Companion.DEFAULT
+import org.opentripplanner.trakpi.model.TransitMode.Companion.TRANSIT
 import java.time.Duration
 import java.time.LocalDateTime
 
 
-/** We do not support all modes: CABLE_CAR, GONDOLA, FUNICULAR is not supported. */
+/**
+ * We do not support all modes: CABLE_CAR, GONDOLA, FUNICULAR is not supported, add modes if needed.
+ */
 enum class TransitMode {
     WALK, BIKE, CAR, BUS, SUBWAY, TRAM, TRAIN, FERRY, AIRPLANE;
 

@@ -1,12 +1,12 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
-import org.opentripplanner.trakpi.domain.model.Coordinate
-import org.opentripplanner.trakpi.domain.model.Place
-import org.opentripplanner.trakpi.domain.model.Tag
-import org.opentripplanner.trakpi.domain.model.TestCase
-import org.opentripplanner.trakpi.domain.model.TravelRequest
-import org.opentripplanner.trakpi.domain.model.location
-import org.opentripplanner.trakpi.domain.model.stopPlace
+import org.opentripplanner.trakpi.model.Coordinate
+import org.opentripplanner.trakpi.model.Place
+import org.opentripplanner.trakpi.model.Tag
+import org.opentripplanner.trakpi.model.TestCase
+import org.opentripplanner.trakpi.model.TravelRequest
+import org.opentripplanner.trakpi.model.location
+import org.opentripplanner.trakpi.model.stopPlace
 
 
 internal class ParseTestCases(val parser: CsvParser) {

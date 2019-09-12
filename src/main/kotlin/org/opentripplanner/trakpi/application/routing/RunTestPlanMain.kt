@@ -1,9 +1,9 @@
-package org.opentripplanner.trakpi.domain.application.routing
+package org.opentripplanner.trakpi.application.routing
 
-import org.opentripplanner.trakpi.domain.application.DomainService
-import org.opentripplanner.trakpi.domain.application.routing.clients.ClientFactory
-import org.opentripplanner.trakpi.domain.model.PlannerAPI
-import org.opentripplanner.trakpi.domain.model.TestRun
+import org.opentripplanner.trakpi.application.DomainService
+import org.opentripplanner.trakpi.application.routing.clients.ClientFactory
+import org.opentripplanner.trakpi.model.PlannerAPI
+import org.opentripplanner.trakpi.model.TestRun
 import java.time.LocalDateTime
 
 fun main(vararg args : String) {

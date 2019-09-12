@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
 import java.io.File
 import kotlin.system.exitProcess
@@ -67,7 +67,6 @@ internal class CmdLineArguments(args: List<String>) {
         |    --clean : Delete existing database entities for each given import file. 
         |    --debug : Print debug info to standard out.
         |    <path>  : CSV file or directory with CSV files. The file name must be one of the following:
-        |        🌼 "migrations.csv"
         |        🌼 "test_cases.csv"
         |        🌼 "test_plans.csv"
         |        🌼 "planners.csv"

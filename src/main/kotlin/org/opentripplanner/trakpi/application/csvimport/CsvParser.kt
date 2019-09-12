@@ -1,8 +1,8 @@
-package org.opentripplanner.trakpi.domain.application.csvimport
+package org.opentripplanner.trakpi.application.csvimport
 
 import com.csvreader.CsvReader
-import org.opentripplanner.trakpi.domain.model.TimeOfDay
-import org.opentripplanner.trakpi.domain.model.parseTimeOfDay
+import org.opentripplanner.trakpi.model.TimeOfDay
+import org.opentripplanner.trakpi.model.parseTimeOfDay
 import org.opentripplanner.trakpi.store.framework.logging.Log
 import java.io.File
 import java.nio.charset.Charset

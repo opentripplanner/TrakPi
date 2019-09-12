@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 
 open class Entity(

@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 import spock.lang.Specification
 import spock.lang.Unroll

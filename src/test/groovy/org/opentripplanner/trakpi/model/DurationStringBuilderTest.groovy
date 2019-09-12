@@ -1,9 +1,9 @@
-package org.opentripplanner.trakpi.domain.model
+package org.opentripplanner.trakpi.model
 
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static org.opentripplanner.trakpi.domain.model.TimeKt.durationToString
+import static org.opentripplanner.trakpi.model.TimeKt.durationToString
 
 
 class DurationStringBuilderTest extends Specification {

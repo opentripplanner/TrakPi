@@ -1,4 +1,4 @@
-package org.opentripplanner.trakpi.domain.application
+package org.opentripplanner.trakpi.application
 
 import org.junit.Ignore
 import spock.lang.Specification
