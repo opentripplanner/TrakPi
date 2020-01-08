@@ -50,6 +50,8 @@ The tool can be used in many use cases/user scenarios:
     1. Calculate performance indicators for all results
     1. Compare performance indicators graphically
 
+# User Guide
+See [User Guide](doc/UserGuide.md)
 
 # Design
 

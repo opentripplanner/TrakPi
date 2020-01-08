@@ -19,11 +19,11 @@ internal class CsvParser(
     private val csvFile: File
 ) {
     companion object {
-        private val TAG_DELIMITERS_PATTERN = "\\s*[;,]\\s*".toPattern()
+        private val TAG_DELIMITERS_PATTERN = "\\s*[,]\\s*".toPattern()
     }
 
     private val log = Log("CsvParser(${csvFile.name})")
-    private val reader = CsvReader(csvFile.absolutePath, ',', Charset.forName("UTF-8"))
+    private val reader = CsvReader(csvFile.absolutePath, ';', Charset.forName("UTF-8"))
 
     init {
         reader.skipEmptyRecords = true

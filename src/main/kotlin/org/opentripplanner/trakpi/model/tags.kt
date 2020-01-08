@@ -1,6 +1,5 @@
 package org.opentripplanner.trakpi.model
 
-import java.lang.IllegalStateException
 import java.util.regex.Pattern
 
 
@@ -126,7 +125,7 @@ private class AndExpr(val lhs : TagExpr, val rhs : TagExpr) : TagExpr {
     override fun eval(tags : Set<Tag>) : Boolean {
         return lhs.eval(tags) && rhs.eval(tags)
     }
-    override fun toString() = "${lhs}&${rhs}"
+    override fun toString() = "${lhs} & ${rhs}"
 }
 
 private class OrExpr(val lhs : TagExpr, val rhs : TagExpr) : TagExpr {

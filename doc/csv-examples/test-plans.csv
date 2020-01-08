@@ -1,0 +1,15 @@
+name;ucTagsExpr
+All; @ALL
+NoTags; @NONE
+Air; Air
+Local travel or short trip; Local
+Long distance; LongDistance
+Long distance Train; LongDistance & Train
+Long distance Bus; LongDistance & Bus
+Inter city buss routes; InterCity & Bus
+Commute; Commute
+City; City
+Rural; Rural
+
+# Compare
+Slow moving; Bus, Tram

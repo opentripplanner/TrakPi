@@ -14,7 +14,7 @@ import java.io.File
 private val LOG = Log("CSV IMPORT")
 
 fun main(vararg args: String) {
-    val cmd = CmdLineArguments(args.toList())
+    val cmd = CmdLineArguments(args)
 
     Log.debugEnabled = cmd.debugEnabled()
 
