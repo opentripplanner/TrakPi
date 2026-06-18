@@ -1,110 +1,129 @@
+# Trakπ
 
-# WIP -- This is work in progress.
+## WIP -- This is work in progress.
+The contract and implementation is likely to change without warning.
 
-This project is not working, it is made public to allow anyone to contribute. Be aware that there 
-are many missing parts that exist in other places. The plan is to copy these parts into this project
-when we get there. Examples of this is:
+## Goals
 
- - The test results comparison, which is part of the SpeedTest in R5
- - ParetoSet, also R5
- - PKI computing grid - t2gran´s local machine... (sorry, needs cleanup before I can submit it)
- 
+The goal of Trakπ is to measure _travel planner_ quality. We want to build a general tool to issue travel planning requests and to build a history of planning results to analyze. 
 
-# Goals
-
-The goal of Trakπ is to measure _travel planner_ quality. We want to build a general tool to issue travel planning requests and to build a history of planning results witch we can analyze. 
-
-What is the _best_ itinerary in a given case is subjective. Therefore; We need to come up with a good way of comparing results in an objective way. The idea is to develop a set of _Key Performance Indicators(KPIs)_. With KPIs we can compare any set of travel planning results.
+What is the _best_ itinerary in a given case is subjective. Therefore; We need to come up with a good way of comparing results in an objective way. The idea is to develop a set of _Key Performance Indicators (KPIs)_. With KPIs we can compare any set of travel planning results.
 
 
 ## Key Performance Indicators (KPIs)
-
 We can compute KPIs for each test case and then compare average and standard deviation for each test run in a selected set of samples. Here is a list of possible KPIs that would be interesting
-  - Success based on dynamic criteria
-  - Number of itineraries returned
-  - Response time for successful requests
-  - Contains the fastest alternative
-  - Contains the most cost effective alternative
-  - % of pareto optimal results
+- Success based on dynamic criteria (dynamic criteria?)
+- Number of itineraries returned (is that useful?)
+  - Why: The timeline of development of itinerary counts can tell us if a change caused more or fewer itineraries.
+  - This doesn't say anything about whether a change is good or bad, but it 
+- Response time for successful requests (+)
+- Contains the fastest alternative
+- Contains the most cost effective alternative 
+- % of pareto optimal results
 
-
-# Use Cases
-
+## Use Cases
 The tool can be used in many use cases/user scenarios: 
-  1. Tune Travel Planner configuration
-  1. Monitor performance over time
-  1. Monitor quality over time
-  1. Verify quality threshold in an integration chain(as part of continuous integration system)
-  1. Compare different travel planners
-  1. Compare special use cases like Accessibility, Mode-specific results, or Operator/Feed existence 
+1. Regression testing, and monitoring quality over time <- pri 1
+2. Performance testing, and monitoring response times over time <- pri 2
+3. Tune Travel Planner configuration
+4. Verify quality threshold in an integration chain(as part of continuous integration system)
+5. Compare different travel planners
+6. Compare special use cases like Accessibility, Mode-specific results, or Operator/Feed existence 
+
+## Inputs
+For a single run, the following inputs are required. They can be configured either with a configuration file or with
+command-line parameters. Command-line parameters always override what is given in the configuration file.
+1. Test cases (travel requests and more). Identified by an id.
+2. Street and transit data
+3. Planner (given by name)
+4. Planner version (e.g. a specific commit hash)
+5. Persistence configuration (e.g. a file path, db connection string, or cloud storage connection string)
+6. Planner arguments (additional arguments passed through to the planner adapter for planner-specific behavior)
+   - These are opaque arguments consumed by the planner adapter. Trakπ itself doesn't consider these.
+
+## Usage - Running a test
+```bash
+# Prepares a version A for testing
+trakpi prepare --version A --plannerargs "--street-data osm-data --transit-data netex-norway"
+
+# Optional: Multiple prepare commands can be run separately with different plannerargs, to support multi-stage setups.
+trakpi prepare --version A --plannerargs "--build-only"
+trakpi prepare --version A --plannerargs "--build-street-graph-only --street-data osm-data"
+trakpi prepare --version A --plannerargs "--build-transit-data-only --transit-data"
+
+# Start a planner. Planners that start a running process must be started before testing
+trakpi start --version A
+
+# Run a test
+trakpi test --version A
+
+# Stop a running planner process
+trakpi stop --version A
+```
+
+Running `trakpi test` without first running `trakpi start` triggers a full `start - test - stop` flow for convenience.
+
+Only a single instance can be started at a time.
+
+## Outputs
+Each test run stores the following outputs for each test case
+1. Full raw outputs from the planner
+2. Outputs from the planner mapped into the standardized format. (See section on Standardized format)
+3. KPIs
+
+## Usage - Analyzing results
+Each test run stores the full outputs
+
+```bash
+# Look at the KPIs for version A
+trakpi kpis --version A
+
+# Compare the KPIs of A and B
+trakpi diff --version A --baseline B
+```
 
 
-# High level usage scenario
+## Writing a planner adapter
+An adapter is needed for each planner you wish to test against. By default, Trakπ comes with an adapter for
+[OpenTripPlanner](https://github.com/opentripplanner/OpenTripPlanner). 
 
-1. Define *test cases* with a travel requests and _tag_ each test case to group them together. 
-1. Define *test plan(s)* - a named collection of test cases.
-1. Define *planners* - a named travel planner instance.
-1. Run a test plan and save test results. 
-1. Analyze and visualize result
-    1. Select test cases or test plan, and set of test runs
-    1. Calculate performance indicators for all results
-    1. Compare performance indicators graphically
+A planner must implement the following SPI:
+* Prepare: Accepts a list of plannerargs. No output.
+* Start: No output.
+* Stop: No output.
+* Test: Outputs raw outputs from the planner in an opaque text format.
+* Mapping:
+  * From and to standardized input (request) format
+  * From and to standardized output format
+* KPI computation:
+  * From standardized outputs
+  * From raw outputs (default: computed from raw outputs mapped to standardized format)
 
-# User Guide
-See [User Guide](doc/UserGuide.md)
+## Domain language
+[Transmodel](https://transmodel-cen.eu/) language is used throughout the project whenever transit-specific terminology
+is needed.
 
-# Design
-
-The core of Trakπ is the `model` (package). We follow DDD principles; Hence general business logic
-goes into the model package - if possible. Use-case specific logic or logic spanning multiple
-aggregates belong in the `application` package. The `application` uses the `DomainService` to 
-access the `model` and the `DomainService` provide methods to store the model using the `store`. 
-The `framework` package contains shared utilities and framework integration - do not put bussiness
-logic here. Try to separate logic used by the application and integration logic into different 
-packages.
-
-
-## Model 
-
-These are the most important building bricks of the testing framework:
-- `Tag` A tag/label is used to categorize test cases and results.
-- `TestCase` A named planning request and tags.
-- `TestPlan` A named set of `TestCases` defined by a Tag expression.
-- `Planner` A named url to a travel planner like ("Entur OTP QA, https://entur-qa.en-tur.no/otp")
-- `TestProfile` A fixed set of parameters passed to a travel request in addition to the test case request parameters. 
-- `TestResult` The result of a single test case request with `Itinerary` and some metadata like response time
-- `TestRun` One execution of a `TestPlan` with `TestResults`
+## Standardized input/output format
+A test run outputs individual planning results in a standardized format, allowing you to compare different planners even
+if they have different output formats.
 
 
-## Application Layers
+## Visualizing results
+TODO. Grafana.
 
-The application consist of the following layers:
-- The `model` is the core types with business logic described above. No dependencies to other 
-project packages is allowed.
-- The `store` is responsible for persistence. The dependency is inverted compared with regular
- multi-tier-architecture. The `store` depends on the `model` and is used by the `DomainService`(only).
-- The `application` uses the `DomainService` to perform its use case specific tasks. 
-- The `framework` package - containing x-cutting logic and framework integration. Try to separate
-utilities and integration logic to avoid circular dependencies. The `framework` sub-packages may 
-depend on the `model` and can be used by the `application`. If the `model` NEEDS to use any framework
- code, make sure to put the needed classes in a sub-package witch does not depend on the model, and
- remember to document it.
- 
+## Usage with git
+TODO.
 
-# Architecture
+High level usecase:
+- Compare a git commit hash with a given baseline. 
+- Test a sequence of commits
+- Bisect with a commit range
 
-We try to honer Object Oriented(OO), Functional Programing(FP), Domain Driven Design(DDD) and a multi-layered architecture principles, as well as borrowing concepts from Data, context, and interaction(DCI). 
+## Multiple dimensions, drill-down and averaging
+There are multiple dimensions to consider in tracking performance. Take for instance the response time KPI:
+This KPI can be analyzed by drilling down into a cross-section of the data:
+- Across planning requests: With e.g. 1000 requests in the sample dataset, the KPI can be analyzed for a single timestamp.
+    - Why? This can show e.g. how different types of requests impact the response time. Some requests are naturally more expensive for a planner to resolve and by looking only at a single timestamp, we can discover those differences.
+- Across "time" (e.g. planner versions by commit hashes): Honing in on a single KPI, it can be analyzed over time, to see e.g. how a request that hits a bottleneck in the planner has developed over time after applying various optimizations.
 
-We divide the application into 3 modules:
- - `model` - The domain model containing general concepts and aggregate business rules. Dependencies to other modules are not allowed, and 3rd party libraries kept at a minimum.
-- `store` - The store map the `model` to persistence storage. For now a very simple ´Log´ object is also part of this module.
-- `application` The application business rules, or use cases put together. The application uses the `store` and build its use case specific business logic on top of the `model`.
-
-
-# Tech
-
-Trakπ is written in _Kotlin_ and with tests in Groovy using the Spock testing framework. We want to use up-to-date frameworks on the same platform as OTP - the Java platform - this will make it easy for OTP developers to maintain the tool.
-
-_MongoDb_ is chosen as a database to be able to get quickly up and running. The tool should not depend too much on this, since it might be better to use a relational database for analyzes.
-
- 
+In addition to drilling down into a single dimension, we can also apply an average (or other aggregation like p95 or p99) across a dimension, e.g. view how response time has developed over time in general.
