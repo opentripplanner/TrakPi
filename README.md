@@ -3,6 +3,37 @@
 ## WIP -- This is work in progress.
 The contract and implementation is likely to change without warning.
 
+## Build and run
+Requires JDK 25+ and Maven.
+
+```bash
+mvn package
+```
+
+This builds all modules and produces a self-contained executable jar at `app/target/trakpi.jar`. Run it directly, or via the `trakpi` launcher script in the project root:
+
+```bash
+java -jar app/target/trakpi.jar --help
+./trakpi --help
+```
+
+`--help` works on any subcommand too, e.g. `./trakpi test --help`.
+
+### Project layout
+Trakπ is a Maven multi-module project:
+- `orchestrator` — prepares, starts and stops the planner under test (lifecycle).
+- `tester` — runs tests against an already-started planner.
+- `app` — the CLI entry point; wires the commands to the orchestrator and tester.
+
+### Development
+Run straight from source, recompiling first (`-am` also rebuilds the modules `app` depends on):
+
+```bash
+mvn -pl app -am compile exec:java -Dexec.mainClass=org.opentripplanner.trakpi.app.MainKt -Dexec.args="--help"
+```
+
+Run the tests with `mvn test`.
+
 ## Goals
 
 The goal of Trakπ is to measure _travel planner_ quality. We want to build a general tool to issue travel planning requests and to build a history of planning results to analyze. 
