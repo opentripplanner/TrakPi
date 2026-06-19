@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-exec java --enable-native-access=ALL-UNNAMED -jar "$(dirname "$0")/app/target/trakpi.jar" "$@"

@@ -4,17 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.opentripplanner.trakpi</groupId>
-    <artifactId>trakpi</artifactId>
-    <name>Trakπ</name>
-    <description>Transit Routing quality Assurance using Key Performance Indicators</description>
+    <artifactId>trakpi-core-parent</artifactId>
+    <name>Trakπ Core (build)</name>
+    <description>Reactor and shared config for the core library modules. Not a consumed artifact.</description>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <!-- The reactor: building this parent builds all modules. -->
     <modules>
-        <module>orchestrator</module>
         <module>tester</module>
-        <module>app</module>
+        <module>orchestrator</module>
+        <module>trakpi</module>
     </modules>
 
     <properties>
@@ -26,7 +25,6 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <!-- Versions are declared once here; modules reference dependencies without versions. -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -50,7 +48,12 @@
                 <version>${junit.version}</version>
             </dependency>
 
-            <!-- Internal modules -->
+            <!-- Core modules, released together. -->
+            <dependency>
+                <groupId>org.opentripplanner.trakpi</groupId>
+                <artifactId>tester</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.opentripplanner.trakpi</groupId>
                 <artifactId>orchestrator</artifactId>
@@ -58,13 +61,12 @@
             </dependency>
             <dependency>
                 <groupId>org.opentripplanner.trakpi</groupId>
-                <artifactId>tester</artifactId>
+                <artifactId>trakpi</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <!-- Shared plugin config; modules activate a plugin by declaring it (without version/config). -->
     <build>
         <pluginManagement>
             <plugins>

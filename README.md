@@ -1,38 +1,49 @@
 # Trakπ
 
-## WIP -- This is work in progress.
-The contract and implementation is likely to change without warning.
+Trakπ is a library and CLI tool for testing and tracking quality of travel planners. It can be used to track
+regressions, performance or any other _key performance indicators_ (KPIs) you might need. The tool is developed to be
+entirely generic, which means you can use it to test any travel planner you like, provided you implement the necessary
+adapters. Trakπ exposes a small SPI for this purpose, and includes a command line interface, so to use it, include the
+library in your project, implement the adapters and wire up the CLI. A reference implementation made for testing
+[OpenTripPlanner](https://github.com/opentripplanner/OpenTripPlanner) is provided in reference/otp.
 
-## Build and run
-Requires JDK 25+ and Maven.
+## User guide
+TODO
+
+## Development
+Requires JDK 25+ and Maven. The repository holds three independent builds — `core` (the library),
+`storage`, and `reference/otp`. The downstream builds resolve `core` from your local Maven
+repository, so build `core` first:
 
 ```bash
-mvn package
+mvn -f core/pom.xml install
+mvn -f storage/file/pom.xml package
+mvn -f reference/otp/pom.xml package
 ```
 
-This builds all modules and produces a self-contained executable jar at `app/target/trakpi.jar`. Run it directly, or via the `trakpi` launcher script in the project root:
+Test a single core module with `-pl`:
 
 ```bash
-java -jar app/target/trakpi.jar --help
-./trakpi --help
+mvn -f core/pom.xml -pl tester test
 ```
-
-`--help` works on any subcommand too, e.g. `./trakpi test --help`.
 
 ### Project layout
-Trakπ is a Maven multi-module project:
-- `orchestrator` — prepares, starts and stops the planner under test (lifecycle).
-- `tester` — runs tests against an already-started planner.
-- `app` — the CLI entry point; wires the commands to the orchestrator and tester.
+The repository contains three independent Maven builds: `core` is a multi-module reactor; `storage`
+and `reference/otp` are standalone builds that depend on the published `core`.
 
-### Development
-Run straight from source, recompiling first (`-am` also rebuilds the modules `app` depends on):
-
-```bash
-mvn -pl app -am compile exec:java -Dexec.mainClass=org.opentripplanner.trakpi.app.MainKt -Dexec.args="--help"
+```
+core/
+  tester          runs tests against an already-started planner
+  orchestrator    prepares, starts and stops the planner
+  trakpi          the library: command-line surface and public entry point (runTrakpi)
+storage/
+  file            file-based ResultsStorage adapter
+reference/
+  otp             executable reference implementation for OpenTripPlanner
 ```
 
-Run the tests with `mvn test`.
+### Running the OTP reference
+To use the OTP reference (`reference/otp`) with a local build of trakpi.core, build `core` first (`mvn -f core/pom.xml install`), then see [README](reference/otp/README.md).
 
 ## Goals
 

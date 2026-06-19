@@ -3,43 +3,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.opentripplanner.trakpi</groupId>
-        <artifactId>trakpi</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
+    <groupId>org.opentripplanner.trakpi</groupId>
+    <artifactId>otp</artifactId>
+    <name>Trakπ OTP reference</name>
+    <description>Executable reference implementation for OpenTripPlanner.</description>
+    <version>1.0.0-SNAPSHOT</version>
 
-    <artifactId>app</artifactId>
-    <name>Trakπ App</name>
-    <description>Command-line entry point. Wires the CLI to the orchestrator and tester modules.</description>
+    <properties>
+        <java.version>25</java.version>
+        <kotlin.version>2.3.21</kotlin.version>
+        <trakpi.version>1.0.0-SNAPSHOT</trakpi.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.ajalt.clikt</groupId>
-            <artifactId>clikt-jvm</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>orchestrator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>tester</artifactId>
+            <artifactId>trakpi</artifactId>
+            <version>${trakpi.version}</version>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>trakpi</finalName>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <configuration>
+                    <jvmTarget>${java.version}</jvmTarget>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -54,7 +63,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>org.opentripplanner.trakpi.app.MainKt</mainClass>
+                                    <mainClass>org.opentripplanner.trakpi.otp.MainKt</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -5,18 +5,31 @@
 
     <parent>
         <groupId>org.opentripplanner.trakpi</groupId>
-        <artifactId>trakpi</artifactId>
+        <artifactId>trakpi-core-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>orchestrator</artifactId>
-    <name>Trakπ Orchestrator</name>
-    <description>Lifecycle management (prepare/start/stop) for the travel planner under test.</description>
+    <artifactId>tester</artifactId>
+    <name>Trakπ Tester</name>
+    <description>Runs tests against an already-started planner.</description>
 
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -27,6 +40,10 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
