@@ -27,8 +27,21 @@ jobs:
       - name: Build and install trakpi core
         run: mvn -B -f core/pom.xml install
 
+      - name: Build and install the file storage adapter
+        run: mvn -B -f storage/file/pom.xml install
+
       - name: Build the OTP reference
         run: mvn -B -f reference/otp/pom.xml package
 
       - name: Run trakpi test against OTP dev
         run: java --enable-native-access=ALL-UNNAMED -jar reference/otp/target/trakpi.jar test --version dev --config reference/otp/trakpi.properties
+
+      - name: Show results
+        run: cat results/*.json
+
+      - name: Upload results
+        uses: actions/upload-artifact@v4
+        with:
+          name: trakpi-results
+          path: results/
+          if-no-files-found: error
