@@ -13,6 +13,7 @@
         <java.version>25</java.version>
         <kotlin.version>2.3.21</kotlin.version>
         <trakpi.version>1.0.0-SNAPSHOT</trakpi.version>
+        <serialization.version>1.11.0</serialization.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -26,6 +27,11 @@
             <groupId>org.opentripplanner.trakpi</groupId>
             <artifactId>trakpi</artifactId>
             <version>${trakpi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-serialization-json-jvm</artifactId>
+            <version>${serialization.version}</version>
         </dependency>
     </dependencies>
 

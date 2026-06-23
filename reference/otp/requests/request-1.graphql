@@ -1,0 +1,18 @@
+{
+  trip(
+    from: { place: "NSR:StopPlace:337" }
+    to: { place: "NSR:StopPlace:59977" }
+    numTripPatterns: 5
+  ) {
+    tripPatterns {
+      duration
+      startTime
+      legs {
+        mode
+        fromPlace { name }
+        toPlace { name }
+        line { publicCode name }
+      }
+    }
+  }
+}

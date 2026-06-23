@@ -107,6 +107,12 @@ Running `trakpi test` without first running `trakpi start` triggers a full `star
 
 Only a single instance can be started at a time.
 
+## Inputs - requests
+Each test run executes a set or requests. These are loaded from a folder of text files as configured in the config file.
+Each text file contains one planner request, and the filename (without extension) is treated as extension.
+Trakpi handles loading the request files without considering how the request is formatted in the file, then hands the
+raw request file contents to an `spi.RequestLoader` to parse the request in a format supported by the `spi.TravelPlanner`.
+
 ## Outputs
 Each test run stores the following outputs for each test case
 1. Full raw outputs from the planner

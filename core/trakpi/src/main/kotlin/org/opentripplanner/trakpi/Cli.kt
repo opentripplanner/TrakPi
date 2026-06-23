@@ -9,10 +9,9 @@ import com.github.ajalt.clikt.parameters.options.required
 import org.opentripplanner.trakpi.orchestrator.Orchestrator
 import org.opentripplanner.trakpi.tester.Tester
 
-/** Assembles the engine and lifecycle and runs the trakpi command-line interface. */
-fun runTrakpi(args: Array<String>) {
+/** Runs the trakpi command-line interface against the supplied [tester]. */
+fun runTrakpi(args: Array<String>, tester: Tester<*>) {
     val orchestrator = Orchestrator()
-    val tester = Tester()
     Trakpi()
         .subcommands(
             Prepare(orchestrator),
@@ -56,10 +55,11 @@ internal class Stop(private val orchestrator: Orchestrator) : VersionedCommand("
     override fun run() = orchestrator.stop(version)
 }
 
-internal class Test(private val tester: Tester) : VersionedCommand("test") {
+internal class Test(private val tester: Tester<*>) : VersionedCommand("test") {
     override fun help(context: Context) = "Run a test. Assumes the planner is running and ready."
 
-    override fun run() = tester.runTest(version)
+    // TODO: --version is not yet used by the engine; it will select the prepared planner build.
+    override fun run() = tester.run()
 }
 
 internal class Kpis : VersionedCommand("kpis") {
