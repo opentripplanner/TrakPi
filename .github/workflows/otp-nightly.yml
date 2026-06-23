@@ -1,14 +1,12 @@
 name: OTP nightly integration
 
-# Runs the trakpi OTP reference against the Entur OTP dev API.
+# Runs the trakpi OTP reference against the Entur OTP dev API, nightly.
 #
-# TEMPORARY: scheduled every 10 minutes for verification. Once confirmed working, switch to the
-# nightly line below (04:00 UTC — GitHub cron is always UTC, and runs are best-effort / may be
-# delayed). Scheduled runs only fire from the default branch.
+# GitHub cron is UTC and best-effort (runs may be delayed). Scheduled runs only fire from the
+# default branch.
 on:
   schedule:
-    - cron: "*/10 * * * *" # TESTING: every 10 minutes
-    # - cron: "0 4 * * *"  # nightly at 04:00 UTC
+    - cron: "0 4 * * *" # 04:00 UTC (~05:00/06:00 Norway). For ~04:00 local: "0 2 * * *" CEST / "0 3 * * *" CET.
   workflow_dispatch: {} # allow manual runs from the Actions tab
 
 jobs:
