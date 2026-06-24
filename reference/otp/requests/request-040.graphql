@@ -1,0 +1,23 @@
+{
+  trip(
+    from: { place: "NSR:StopPlace:157" }
+    to: { place: "NSR:StopPlace:418" }
+    numTripPatterns: 1
+    searchWindow: 1440
+    modes: { accessMode: foot egressMode: foot transportModes: [ { transportMode: rail } { transportMode: bus } ] }
+  ) {
+    tripPatterns {
+      expectedStartTime
+      expectedEndTime
+      duration
+      walkDistance
+      legs {
+        mode
+        duration
+        distance
+        line { publicCode name }
+      }
+    }
+    debugOutput { totalTime }
+  }
+}
