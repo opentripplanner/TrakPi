@@ -13,6 +13,12 @@ fun main(args: Array<String>) =
         args,
         requestLoader = OtpRequestLoader(),
         travelPlanner = OTPTravelPlanner(OTP_DEV_ENDPOINT, clientName = "entur-trakpi-dev"),
-        kpiCalculators = listOf(ItineraryCountKPICalculator()),
+        kpiCalculators =
+            listOf(
+                ItineraryCountKPICalculator(),
+                RoutingTimeKPICalculator(),
+                FastestItineraryKPICalculator(),
+                MinTransfersKPICalculator(),
+            ),
         resultsStorage = FileResultsStorage(Path.of(System.getenv("TRAKPI_RESULTS_DIR") ?: "results")),
     )
