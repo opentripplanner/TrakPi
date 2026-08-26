@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.opentripplanner.trakpi</groupId>
-    <artifactId>otp</artifactId>
+    <artifactId>trakpi-reference-otp</artifactId>
     <name>Trakπ OTP reference</name>
     <description>Executable reference implementation for OpenTripPlanner.</description>
     <version>1.0.0-SNAPSHOT</version>
@@ -19,20 +19,38 @@
     </properties>
 
     <dependencies>
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-analyzer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-cli</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-orchestrator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-tester</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-storage-file</artifactId>
+            <version>${storage.file.version}</version>
+        </dependency>
+
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>trakpi</artifactId>
-            <version>${trakpi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>storage-file</artifactId>
-            <version>${storage.file.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>

@@ -10,11 +10,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>orchestrator</artifactId>
-    <name>Trakπ Orchestrator</name>
+    <artifactId>trakpi-core-orchestrator</artifactId>
+    <name>Trakπ Core Orchestrator</name>
     <description>Lifecycle management (prepare/start/stop) for the travel planner under test.</description>
 
     <dependencies>
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>

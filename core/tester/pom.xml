@@ -10,11 +10,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>tester</artifactId>
-    <name>Trakπ Tester</name>
+    <artifactId>trakpi-core-tester</artifactId>
+    <name>Trakπ Core Tester</name>
     <description>Runs tests against an already-started planner.</description>
 
     <dependencies>
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>

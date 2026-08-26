@@ -3,6 +3,7 @@
 
 # Compiled class file
 target
+_notes
 
 # maven-shade-plugin artifact (written to project root)
 dependency-reduced-pom.xml

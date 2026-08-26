@@ -5,8 +5,8 @@
 
     <!-- Standalone build: a consumer of the published trakpi core, not part of its reactor. -->
     <groupId>org.opentripplanner.trakpi</groupId>
-    <artifactId>storage-bigquery</artifactId>
-    <name>Trakπ Storage: BigQuery</name>
+    <artifactId>trakpi-storage-bigquery</artifactId>
+    <name>Trakπ Storage BigQuery</name>
     <description>ResultsStorage adapter that streams each result's KPIs into a BigQuery table.</description>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -33,15 +33,18 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-tester</artifactId>
+            <version>${trakpi.version}</version>
+        </dependency>
+
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>tester</artifactId>
-            <version>${trakpi.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.cloud</groupId>

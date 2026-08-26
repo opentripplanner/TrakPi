@@ -10,11 +10,27 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>trakpi</artifactId>
-    <name>Trakπ</name>
+    <artifactId>trakpi-core-cli</artifactId>
+    <name>Trakπ Core CLI</name>
     <description>The command-line surface and public entry point, on top of the engine and lifecycle.</description>
 
     <dependencies>
+
+        <!-- project dependencies -->
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-tester</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-orchestrator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner.trakpi</groupId>
+            <artifactId>trakpi-core-analyzer</artifactId>
+        </dependency>
+
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
@@ -22,18 +38,6 @@
         <dependency>
             <groupId>com.github.ajalt.clikt</groupId>
             <artifactId>clikt-jvm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>tester</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>orchestrator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.opentripplanner.trakpi</groupId>
-            <artifactId>analyzer</artifactId>
         </dependency>
 
         <!-- Test dependencies -->

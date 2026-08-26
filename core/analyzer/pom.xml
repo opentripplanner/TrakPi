@@ -10,11 +10,12 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>analyzer</artifactId>
-    <name>Trakπ Analyzer</name>
+    <artifactId>trakpi-core-analyzer</artifactId>
+    <name>Trakπ Core Analyzer</name>
     <description>Reads stored run history and computes KPI trends and diffs.</description>
 
     <dependencies>
+        <!-- 3rd party dependencies -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
