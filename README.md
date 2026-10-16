@@ -1,3 +1,7 @@
+<p align="center">
+<img src="doc/image/TrakPi-logo.png" alt="Project Logo" width="171" />
+</p> 
+
 # Trakπ
 
 Trakπ is a library and CLI tool for testing and tracking the quality of travel planners. It can be used to track
