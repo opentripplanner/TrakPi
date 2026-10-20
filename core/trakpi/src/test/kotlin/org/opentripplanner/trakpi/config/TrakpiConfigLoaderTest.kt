@@ -1,6 +1,7 @@
 package org.opentripplanner.trakpi.config
 
 import java.nio.file.Files
+import kotlin.io.path.invariantSeparatorsPathString
 import kotlin.io.path.writeText
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -11,7 +12,7 @@ class TrakpiConfigLoaderTest {
     fun `reads requests dir from the config file`() {
         val requests = Files.createTempDirectory("requests")
         val file = Files.createTempFile("trakpi", ".properties")
-        file.writeText("requests.dir=$requests")
+        file.writeText("requests.dir=${requests.invariantSeparatorsPathString}")
 
         val config = TrakpiConfigLoader.load(configFile = file, overrides = emptyMap())
 
@@ -32,7 +33,7 @@ class TrakpiConfigLoaderTest {
         val fromFile = Files.createTempDirectory("from-file")
         val fromOverride = Files.createTempDirectory("from-override")
         val file = Files.createTempFile("trakpi", ".properties")
-        file.writeText("requests.dir=$fromFile")
+        file.writeText("requests.dir=${fromFile.invariantSeparatorsPathString}")
 
         val config = TrakpiConfigLoader.load(configFile = file, overrides = mapOf("requests.dir" to "$fromOverride"))
 
@@ -52,7 +53,7 @@ class TrakpiConfigLoaderTest {
     fun `blank override is ignored and the file value is kept`() {
         val requests = Files.createTempDirectory("requests")
         val file = Files.createTempFile("trakpi", ".properties")
-        file.writeText("requests.dir=$requests")
+        file.writeText("requests.dir=${requests.invariantSeparatorsPathString}")
 
         val config = TrakpiConfigLoader.load(configFile = file, overrides = mapOf("requests.dir" to "  "))
 
@@ -89,7 +90,7 @@ class TrakpiConfigLoaderTest {
     fun `fails when a file-configured requests dir does not exist`() {
         val missing = Files.createTempDirectory("x").resolve("missing")
         val file = Files.createTempFile("trakpi", ".properties")
-        file.writeText("requests.dir=$missing")
+        file.writeText("requests.dir=${missing.invariantSeparatorsPathString}")
 
         assertFailsWith<IllegalArgumentException> {
             TrakpiConfigLoader.load(configFile = file, overrides = emptyMap())
